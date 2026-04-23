@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply overflow-x-hidden bg-[#2e2d2d] font-sans text-ink antialiased;
+}
+
+#root {
+  @apply min-h-screen;
+}
+
+::selection {
+  background: rgba(52, 111, 122, 0.22);
+}
+
+@layer components {
+  .page-shell {
+    @apply min-h-screen w-full overflow-hidden bg-bone;
+  }
+
+  .page-gutter {
+    @apply mx-auto w-full max-w-[1700px] px-5 sm:px-7 md:px-10 lg:px-12 xl:px-16 2xl:px-20;
+  }
+
+  .nav-link {
+    @apply text-sm font-medium tracking-[0.08em] text-ink transition-colors duration-300 hover:text-olive;
+  }
+
+  .cta-button {
+    @apply inline-flex min-h-14 items-center justify-center rounded-2xl bg-teal px-8 text-base font-medium uppercase tracking-[0.03em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#2f6370];
+  }
+
+  .image-card {
+    @apply overflow-hidden rounded-[26px];
+  }
+
+  .image-card img {
+    @apply h-full w-full object-cover transition duration-500 hover:scale-[1.04];
+  }
+
+  .section-marker {
+    @apply flex items-center justify-center rounded-[28px] bg-teal text-[72px] font-extrabold leading-none text-white md:text-[88px] lg:text-[108px];
+  }
+
+  .reveal {
+    @apply opacity-0;
+  }
+
+  .reveal.is-visible {
+    @apply animate-reveal opacity-100;
+  }
+}
