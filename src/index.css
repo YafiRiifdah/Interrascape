@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -22,7 +23,7 @@ body {
 
 @layer components {
   .page-shell {
-    @apply min-h-screen w-full overflow-hidden bg-bone;
+    @apply min-h-screen w-full overflow-hidden bg-[#fcf8f2];
   }
 
   .page-gutter {
@@ -30,11 +31,11 @@ body {
   }
 
   .nav-link {
-    @apply text-sm font-medium tracking-[0.08em] text-ink transition-colors duration-300 hover:text-olive;
+    @apply text-sm font-medium tracking-[0.08em] text-ink transition-colors duration-300 hover:text-[#b98b69];
   }
 
   .cta-button {
-    @apply inline-flex min-h-14 items-center justify-center rounded-2xl bg-teal px-8 text-base font-medium uppercase tracking-[0.03em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#2f6370];
+    @apply inline-flex min-h-14 items-center justify-center rounded-2xl bg-[#b98b69] px-8 text-base font-medium uppercase tracking-[0.03em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#a77d5e];
   }
 
   .image-card {
@@ -50,10 +51,21 @@ body {
   }
 
   .reveal {
-    @apply opacity-0;
+    @apply opacity-100;
   }
 
   .reveal.is-visible {
     @apply animate-reveal opacity-100;
   }
+
+  .hero-typewriter {
+    position: relative;
+  }
+
+  .hero-type-line {
+    display: block;
+    min-height: 0.98em;
+    white-space: nowrap;
+  }
+
 }

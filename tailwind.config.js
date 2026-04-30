@@ -12,6 +12,7 @@ export default {
       },
       fontFamily: {
         sans: ['Manrope', 'sans-serif'],
+        serif: ['Cormorant Garamond', 'serif'],
       },
       boxShadow: {
         panel: '0 18px 40px rgba(34, 46, 37, 0.08)',

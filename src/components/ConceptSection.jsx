@@ -1,62 +1,102 @@
+import { useState } from 'react'
+
 const conceptItems = [
   {
-    title: 'Seamless Interior',
-    body: 'Ruang yang mengalir tanpa sekat yang terasa kaku. Setiap sudut terhubung dengan lembut, menghadirkan ketenangan, cahaya alami, dan kenyamanan yang utuh.',
+    title: 'Interior Concept',
+    body: 'Mood direction, color palettes, materials, furniture, and spatial storytelling.',
+    icon: '01',
   },
   {
-    title: 'Connected Landscape',
-    body: 'Tanaman tidak lagi berada di luar, melainkan hadir dan menjadi bagian dari keseharian. Hijau yang menyapa dari dalam, udara yang bergerak bebas, dan menciptakan suasana menyenangkan.',
+    title: 'Space Planning',
+    body: 'Functional layouts for living rooms, bedrooms, dining areas, and compact homes.',
+    icon: '02',
+  },
+  {
+    title: 'Styling Direction',
+    body: 'Finishing touches, art, lighting, soft furnishings, and installation guidance.',
+    icon: '03',
   },
 ]
 
-export function ConceptSection({ images }) {
-  return (
-    <section id="service" className="page-gutter pb-24 pt-8 md:pb-28 lg:pb-32 lg:pt-10">
-      <div className="grid gap-10 xl:grid-cols-[minmax(300px,0.86fr)_minmax(0,1.14fr)] xl:gap-14 2xl:gap-20">
-        <div className="reveal min-w-0">
-          <div className="max-w-[540px]">
-            <h2 className="text-[clamp(3.2rem,5.8vw,6.4rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.075em] text-olive">
-              KONSEP
-            </h2>
-            <p className="mt-4 text-sm tracking-[0.18em] text-black sm:text-base">
-              seamless interior, connected landscape
-            </p>
-          </div>
-        </div>
+const categories = ['All Projects', 'Bedroom', 'Living Room', 'Dining', 'Home Office', 'More']
 
-        <div className="grid gap-10 md:grid-cols-2 md:gap-8 lg:gap-10 xl:gap-12">
+export function ConceptSection({ category }) {
+  const [activeCategory, setActiveCategory] = useState(categories[0])
+  const filteredProducts =
+    activeCategory === 'All Projects'
+      ? category.products
+      : category.products.filter((product) => product.category === activeCategory)
+
+  return (
+    <section id="services" className="page-gutter scroll-mt-24 pb-20 pt-4 md:pb-24">
+      <div className="reveal">
+        <h2 className="text-center text-[clamp(2rem,4vw,3rem)] font-extrabold tracking-[-0.04em] text-[#2c2420]">
+          Services for Refined Living
+        </h2>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
           {conceptItems.map((item) => (
-            <article key={item.title} className="reveal min-w-0">
-              <div className="inline-flex min-h-16 w-full max-w-[320px] items-center justify-center rounded-2xl bg-teal px-6 text-center text-[0.98rem] font-medium uppercase tracking-[0.03em] text-white sm:text-[1.02rem]">
-                {item.title}
+            <article
+              key={item.title}
+              className="rounded-[18px] bg-[#fffaf5] px-5 py-5 shadow-[0_12px_24px_rgba(34,46,37,0.04)]"
+            >
+              <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#f4ece6] text-[#b98b69]">
+                <span className="text-sm font-extrabold">{item.icon}</span>
               </div>
-              <p className="mt-10 max-w-[32ch] text-[1.02rem] leading-[1.65] text-ink lg:text-[1.05rem]">
-                {item.body}
-              </p>
+              <h3 className="text-base font-bold text-[#302723]">{item.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-[#7f6a61]">{item.body}</p>
             </article>
           ))}
         </div>
       </div>
 
-      <div className="reveal mt-14 md:mt-16">
-        <a href="#portfolio" className="cta-button w-full max-w-[320px]">
-          Lihat Portfolio
-        </a>
-      </div>
+      <div id="products" className="reveal mt-20 scroll-mt-32 lg:scroll-mt-36">
+        <h2 className="text-center text-[clamp(2rem,4vw,3rem)] font-extrabold tracking-[-0.04em] text-[#2c2420]">
+          Selected Portfolio
+        </h2>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          {categories.map((item) => {
+            const isActive = item === activeCategory
 
-      <div
-        id="portfolio"
-        className="mt-10 grid scroll-mt-24 gap-5 md:grid-cols-[1fr_0.75fr] md:items-stretch lg:mt-12 xl:grid-cols-[1.2fr_0.46fr_0.54fr] xl:gap-6"
-      >
-        <figure className="image-card reveal h-[290px] md:row-span-2 md:h-full lg:h-[360px] xl:row-span-1 xl:h-[390px]">
-          <img src={images.conceptWide} alt="People walking through a lush natural path" />
-        </figure>
+            return (
+            <button
+              key={item}
+              type="button"
+              onClick={() => setActiveCategory(item)}
+              aria-pressed={isActive}
+              className={`rounded-xl px-4 py-2 text-xs font-semibold transition ${
+                isActive
+                  ? 'bg-[#b98b69] text-white'
+                  : 'bg-[#f4ece6] text-[#9b8578] hover:bg-[#eadfd6]'
+              }`}
+            >
+              {item}
+            </button>
+            )
+          })}
+        </div>
 
-        <div className="section-marker reveal h-[220px] md:h-auto lg:h-[360px] xl:h-[390px]">03.</div>
-
-        <figure className="image-card reveal h-[290px] md:h-[260px] lg:h-[360px] xl:h-[390px]">
-          <img src={images.conceptSide} alt="Travelers moving through a misty landscape" />
-        </figure>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {filteredProducts.map((product) => (
+            <article
+              key={product.title}
+              className="overflow-hidden rounded-[20px] bg-white shadow-[0_16px_32px_rgba(35,33,29,0.06)]"
+            >
+              <div className="overflow-hidden bg-[#efe8df]">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="h-[240px] w-full object-cover transition duration-500 hover:scale-[1.04]"
+                />
+              </div>
+              <div className="px-4 py-4 text-center">
+                <h3 className="text-sm font-semibold text-[#2b2522]">{product.title}</h3>
+                <p className="mt-2 text-sm font-bold uppercase tracking-[0.14em] text-[#b98b69]">
+                  {product.price}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )
